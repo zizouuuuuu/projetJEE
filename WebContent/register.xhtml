@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+	  
+<h:head>
+<meta charset="ISO-8859-1"/>
+<title>Inscription</title>
+</h:head>
+<h:body>
+<br /><br />
+	<h:form>
+	
+		Firstname <h:inputText type="text" value="#{register.firstname}" required="true"/>
+		<br /><br />
+		
+		Lastname <h:inputText type="text" value="#{register.lastname}" required="true"/>
+		<br /><br />
+		
+		Username <h:inputText type="text" value="#{register.username}" required="true"/>
+			
+		<br /><br />
+		Password <h:inputSecret type="password" value="#{register.password}" required="true" />
+		<br /><br />
+		<h:commandButton value="Login" action="#{register.signUp()}" /> 
+		
+	</h:form>
+</h:body>
+</html>
