@@ -11,7 +11,6 @@
 <br /><br />
 	<h:form>
 		Username <h:inputText type="text" value="#{login.username}" required="true" />
-		</h:inputText>
 		<br /><br />
 		Password <h:inputSecret type="password" value="#{login.password}" required="true" />
 		<br /><br />
@@ -20,6 +19,6 @@
 	</h:form>
 	
 	<br/>
-	<h:link href="register.xhtml">Register</h:link>>
+	<h:link value="Register" outcome="register.xhtml"/>
 </h:body>
 </html>

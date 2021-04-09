@@ -70,6 +70,7 @@ public class UserDaoMysql {
 			rs.close();
 			ps.close();
 			stmt.close();
+			connection.close();
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -82,11 +83,12 @@ public class UserDaoMysql {
 		try {
 			stmt = connection.createStatement();
 			
-			PreparedStatement ps = connection.prepareStatement("INSERT into user values(?,?,?,?)");
-			ps.setString(1, username);
-		    ps.setString(2, password);
-		    ps.setString(3, firstname);
-		    ps.setString(4, lastname);
+			PreparedStatement ps = connection.prepareStatement("INSERT into user (firstname, lastname, username, password)"
+					+ " values(?,?,?,?)");
+			ps.setString(1, firstname);
+		    ps.setString(2, lastname);
+		    ps.setString(3, username);
+		    ps.setString(4, password);
 			ps.execute();
 			
 			// Loop over the database result set and create the
@@ -95,7 +97,8 @@ public class UserDaoMysql {
 			// Free resources
 			ps.close();
 			stmt.close();
-			return "seccess";
+			connection.close();
+			return "success";
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} 

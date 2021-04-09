@@ -23,8 +23,10 @@
 		<br /><br />
 		Password <h:inputSecret type="password" value="#{register.password}" required="true" />
 		<br /><br />
-		<h:commandButton value="Login" action="#{register.signUp()}" /> 
+		<h:commandButton value="Register" action="#{register.signUp()}" /> 
 		
 	</h:form>
+	
+	<h:link value="Login" outcome="login.xhtml"/>
 </h:body>
 </html>

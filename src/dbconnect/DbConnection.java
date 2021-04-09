@@ -10,17 +10,17 @@ public class DbConnection {
 	/**
 	 * DSN to connect to the database
 	 */
-	static final String DB_URL = "jdbc:mysql://localhost/projetSite";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/projetSite";
 
 	/**
 	 * Username to connect to the database
 	 */
-	static final String USER = "yourUsername";
+	static final String USER = "root";
 
 	/**
 	 * Password to connect to the database
 	 */
-	static final String PASS = "yourPassword";
+	static final String PASS = "root";
 
 	/**
 	 * The connection to the database
@@ -38,7 +38,12 @@ public class DbConnection {
 	{
 		if (null == connection) {
 			try {
-				Class.forName(JDBC_DRIVER);
+				try {
+					Class.forName(JDBC_DRIVER).newInstance();
+				} catch (InstantiationException | IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				connection = DriverManager.getConnection(DB_URL,USER,PASS);
 			} catch (ClassNotFoundException e) {
 				//Class.forName failed
