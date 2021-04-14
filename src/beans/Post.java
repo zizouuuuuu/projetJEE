@@ -8,6 +8,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import dbconnect.PostDaoMysql;
 import model.PostM;
 
 
@@ -26,9 +27,11 @@ public class Post implements Serializable{
 	String contenu;
 	int idUser;
 	
-	List<PostM> posts;
+	List<PostM> posts ;
 
 	public List<PostM> getPosts() {
+		PostDaoMysql p = new PostDaoMysql();
+		this.posts = p.getAllPosts();
 		return posts;
 	}
 

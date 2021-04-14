@@ -20,7 +20,7 @@
 	<ul>
     <ui:repeat value="#{post.posts}" var="p">
         <li>
-
+        <h:outputText type="number" value="#{p.idUser}"/>
        	<h:outputText type="text" value="#{p.contenu}"/>
 		
         </li>

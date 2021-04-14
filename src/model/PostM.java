@@ -11,12 +11,11 @@ public class PostM {
 	int idUser;
 	
 	
-	public PostM(Date date, Time heure, String contenu, int idUser) {
-		super();
-		this.date = date;
-		this.heure = heure;
-		this.contenu = contenu;
-		this.idUser = idUser;
+	public PostM() {
+		/*
+		 * super(); this.date = date; this.heure = heure; this.contenu = contenu;
+		 * this.idUser = idUser;
+		 */
 	}
 	
 	public Date getDate() {
