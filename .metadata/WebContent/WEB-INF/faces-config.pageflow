@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16170997314910" configfile="/ProjetSite/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" id="pf16170999578621" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" outlinks="pf16170999578622 pf16170999578623" inlinks="pf16170999578623 pf16170999578624" path="/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="register.xhtml" id="pf16170999578635" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" outlinks="pf16170999578624 pf16179250078180" inlinks="pf16170999578622 pf16179250078180" path="/register.xhtml"/>
-  <links id="pf16170999578622" target="pf16170999578635" source="pf16170999578621" outcome="success"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" id="pf16170999578621" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf16170999578623 pf16183600086940" inlinks="pf16170999578623 pf16170999578624" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="register.xhtml" id="pf16170999578635" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" outlinks="pf16170999578624 pf16179250078180" inlinks="pf16179250078180" path="/register.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="accueil.xhtml" id="pf16183600086951" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf16183600086940" path="/accueil.xhtml"/>
   <links id="pf16170999578623" target="pf16170999578621" source="pf16170999578621" outcome="error"/>
   <links id="pf16170999578624" target="pf16170999578621" source="pf16170999578635" outcome="success"/>
   <links id="pf16179250078180" target="pf16170999578635" source="pf16170999578635" outcome="error"/>
+  <links id="pf16183600086940" target="pf16183600086951" source="pf16170999578621" outcome="success"/>
 </pageflow:Pageflow>

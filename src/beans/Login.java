@@ -1,4 +1,5 @@
-package authentification;
+package beans;
+
 
 import java.io.Serializable;
 
@@ -45,3 +46,4 @@ public class Login implements Serializable {
 	}
 
 }
+

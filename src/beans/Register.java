@@ -1,4 +1,4 @@
-package authentification;
+package beans;
 
 import java.io.Serializable;
 
@@ -16,7 +16,7 @@ public class Register implements Serializable {
 	 */
 	private static final long serialVersionUID = 964794073748929712L;
 	
-	private String username, password, firstname, lastname;
+	String username, password, firstname, lastname;
 
 	public String getUsername() {
 		return username;
