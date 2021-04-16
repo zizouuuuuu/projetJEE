@@ -5,10 +5,13 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import dbconnect.PostDaoMysql;
+import dbconnect.RelationDaoMysql;
 import model.PostM;
 
 
@@ -28,10 +31,14 @@ public class Post implements Serializable{
 	int idUser;
 	
 	List<PostM> posts ;
-
-	public List<PostM> getPosts() {
+	
+	@PostConstruct
+    public void init() {
 		PostDaoMysql p = new PostDaoMysql();
 		this.posts = p.getAllPosts();
+	}
+
+	public List<PostM> getPosts() {
 		return posts;
 	}
 
@@ -69,7 +76,14 @@ public class Post implements Serializable{
 	
 	
 	public String addPost() {
+		PostM p = new PostM();
+		p.setContenu(contenu);
+		this.idUser = (int) FacesContext.getCurrentInstance().getExternalContext()
+		        .getSessionMap().get("idUser");
 		
-		return "";
+		p.setIdUser(idUser);
+		PostDaoMysql d = new PostDaoMysql();
+		d.addPostBD(p);
+		return "success";
 	}
 }

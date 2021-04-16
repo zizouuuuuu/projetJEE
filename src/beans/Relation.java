@@ -3,9 +3,15 @@ package beans;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
+import dbconnect.RelationDaoMysql;
+import model.RelationM;
 import model.User;
 
 @Named
@@ -20,6 +26,14 @@ public class Relation implements Serializable{
 	int idUser1, idUser2;
 	
 	List<User> relations;
+	RelationDaoMysql r = new RelationDaoMysql();
+	@PostConstruct
+    public void init() {
+		
+		this.idUser1 = (int) FacesContext.getCurrentInstance().getExternalContext()
+		        .getSessionMap().get("idUser");
+		this.relations = r.getAll(idUser1);
+	}
 
 	public List<User> getRelations() {
 		return relations;
@@ -33,10 +47,11 @@ public class Relation implements Serializable{
 		return idUser1;
 	}
 
-	public void setIdUser1(int idUser1) {
-		this.idUser1 = idUser1;
+	public void setIdUser1(int idUser) {
+		this.idUser1 = idUser;
 	}
-
+	
+	
 	public int getIdUser2() {
 		return idUser2;
 	}
@@ -45,8 +60,17 @@ public class Relation implements Serializable{
 		this.idUser2 = idUser2;
 	}
 	
+
 	public String addRelation() {
-		
-		return "";
+		this.idUser1 = (int) FacesContext.getCurrentInstance().getExternalContext()
+		        .getSessionMap().get("idUser");
+		/*
+		 * HttpServletRequest request = (HttpServletRequest)
+		 * FacesContext.getCurrentInstance().getExternalContext() .getRequest();
+		 * this.idUser2 = Integer.parseInt(request.getParameter("idUser2"));
+		 */
+		RelationM relation = new RelationM(idUser1, idUser2);
+		r.addRelationDb(relation);
+		return "success";
 	}
 }

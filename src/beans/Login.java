@@ -4,6 +4,7 @@ package beans;
 import java.io.Serializable;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import dbconnect.UserDaoMysql;
@@ -41,7 +42,14 @@ public class Login implements Serializable {
 		UserDaoMysql u = new UserDaoMysql();
 		
 		User user = u.login(username, password);
+		int id = 0;
+		//if(user != null) {
+			id = user.getId();
+		//}
+			
 		
+		FacesContext.getCurrentInstance().getExternalContext()
+        .getSessionMap().put("idUser", id);
 		return user!=null ? "success" : "error";
 	}
 

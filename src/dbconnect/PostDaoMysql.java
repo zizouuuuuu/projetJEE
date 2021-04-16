@@ -14,26 +14,35 @@ public class PostDaoMysql  {
 	public ArrayList<PostM> getAllPosts(){
 		ArrayList<PostM> a = new ArrayList<>();
 		Connection connection = DbConnection.getInstance();
-		Statement stmt;
+		
 		
 		try {
-			stmt = connection.createStatement();
-			PreparedStatement ps;
-			ps = connection.prepareStatement("Select * from post");
-			ResultSet rs = ps.executeQuery();
-			PostM post = new PostM();
 			
+			PreparedStatement ps;
+			ps = connection.prepareStatement("SELECT * FROM post");
+			ResultSet rs = ps.executeQuery();
+			if(rs.next() == false) return null;
 			while (rs.next()) {
+				PostM post = new PostM();
 				post.setContenu(rs.getString("contenu"));
 				post.setIdUser(Integer.parseInt(rs.getString("id_user")));
+				
+				PreparedStatement sql;
+				sql = connection.prepareStatement("SELECT * FROM user WHERE id=?");
+				sql.setString(1, rs.getString("id_user"));
+				ResultSet r = sql.executeQuery();
+				
+				while(r.next()) {
+					post.setFirstname(r.getString("firstname"));
+					post.setLastname(r.getString("lastname"));
+				}
+				
 				a.add(post);
 			}
 			
 			rs.close();
 			ps.close();
-			stmt.close();
-			connection.close();
-			
+						
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -42,24 +51,23 @@ public class PostDaoMysql  {
 	}
 	
 	
-	public void addPostBD(PostM post) {
+	public String addPostBD(PostM post) {
 		Connection connection = DbConnection.getInstance();
 		
 		try {
 			PreparedStatement ps;
-			ps = connection.prepareStatement("insert into post (contenu, id_user) values (?, ?)");
+			ps = connection.prepareStatement("INSERT into post (contenu, id_user) values (?,?)");
 			ps.setString(1, post.getContenu());
 			ps.setString(2, String.valueOf(post.getIdUser()));
 			
 			ps.execute();
 			
 			ps.close();
-			connection.close();
-			
+			return "success";
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
+		return "error";
 	}
 }

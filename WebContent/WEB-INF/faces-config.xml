@@ -28,4 +28,28 @@
     		<to-view-id>/register.xhtml</to-view-id>
     	</navigation-case>
     </navigation-rule>
+    
+    <navigation-rule>
+    	<from-view-id>/accueil.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-outcome>success</from-outcome>
+    		<to-view-id>/accueil.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+    		<from-outcome>error</from-outcome>
+    		<to-view-id>/accueil.xhtml</to-view-id>
+    	</navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+    	<from-view-id>/relation.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-outcome>success</from-outcome>
+    		<to-view-id>/relation.xhtml</to-view-id>
+    	</navigation-case>
+    	<navigation-case>
+    		<from-outcome>error</from-outcome>
+    		<to-view-id>/relation.xhtml</to-view-id>
+    	</navigation-case>
+    </navigation-rule>
 </faces-config>

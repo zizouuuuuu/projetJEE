@@ -7,18 +7,49 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import beans.Relation;
+import model.RelationM;
 import model.User;
 
 
 public class RelationDaoMysql {
 	
-	public ArrayList<Object> getAll(){
-		ArrayList<Object> a = new ArrayList<>();
+	public ArrayList<User> getAll(int idUser){
+		ArrayList<User> a = new ArrayList<>();
+		Connection connection = DbConnection.getInstance();
+		
+		try {
+			PreparedStatement ps;
+			ps = connection.prepareStatement("SELECT * FROM user WHERE id != ?");
+			ps.setString(1, String.valueOf(idUser));
+			ResultSet r = ps.executeQuery();
+			
+			User user = new User();
+			
+			while(r.next()) {
+				user.setFirstname(r.getString("firstname"));
+				user.setLastname(r.getString("lastname"));
+				user.setId(Integer.parseInt(r.getString("id")));
+				a.add(user);
+			}
+			
+			r.close();
+			ps.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	public ArrayList<User> getMyRelation(int idUser){
+		ArrayList<User> a = new ArrayList<>();
 		Connection connection = DbConnection.getInstance();
 		
 		try {
 			PreparedStatement ps = connection.prepareStatement("select * from user where"
 					+ "id = (select * from relation where id_user_1 = ? or id_user_1 = 2)");
+			ps.setString(1, String.valueOf(idUser));
+			ps.setString(2, String.valueOf(idUser));
 			ResultSet r = ps.executeQuery();
 			
 			User user = new User();
@@ -40,26 +71,38 @@ public class RelationDaoMysql {
 		return a;
 	}
 	
-	public void addRelationDb(Relation relation) {
+	public String addRelationDb(RelationM relation) {
 		Connection connection = DbConnection.getInstance();
 		
 		try {
-			PreparedStatement ps = connection.prepareStatement("insert into relation values(?,?)");
-			ps.setString(1, String.valueOf(relation.getIdUser1()));
-			ps.setString(2, String.valueOf(relation.getIdUser2()));
+			PreparedStatement exist;
+			exist = connection.prepareStatement("SELECT * from relation where id_user_1=? AND id_user_2=? OR id_user_1 = ? AND id_user_2=?");
+			exist.setInt(1, relation.getIdUser1());
+			exist.setInt(2, relation.getIdUser2());
+			exist.setInt(3, relation.getIdUser2());
+			exist.setInt(4, relation.getIdUser1());
+			ResultSet r = exist.executeQuery();
+			
+			if(r.next()) {
+				return "error";
+			}
+			PreparedStatement ps = connection.prepareStatement("Insert into relation values(?,?)");
+			ps.setInt(1, relation.getIdUser1());
+			ps.setInt(2, relation.getIdUser2());
 			ps.execute();
 			
 			ps.close();
-			connection.close();
+			return "success";
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
+		return "error";
 	}
 	
-	public void deleteRelationDb(Relation relation) {
+	public void deleteRelationDb(RelationM relation) {
 		Connection connection = DbConnection.getInstance();
 		try {
-			PreparedStatement ps = connection.prepareStatement("delete from relation values(?,?)");
+			PreparedStatement ps = connection.prepareStatement("DELETE FROM relation VALUES(?,?)");
 			ps.setString(1, String.valueOf(relation.getIdUser1()));
 			ps.setString(2, String.valueOf(relation.getIdUser2()));
 			ps.execute();

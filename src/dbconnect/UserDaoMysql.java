@@ -48,29 +48,26 @@ public class UserDaoMysql {
 	public User login(String username, String password) {
 		User user = new User();
 		Connection connection = DbConnection.getInstance();
-		Statement stmt;
+		
 		
 		try {
-			stmt = connection.createStatement();
+		
 			PreparedStatement ps;
-			ps = connection.prepareStatement("Select * from user where username=? and password=?");
+			ps = connection.prepareStatement("SELECT * FROM user WHERE username=? AND password=?");
 			ps.setString(1, username);
 		    ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
+			//if(rs.next() == false) return null;
 			
-			
-			// Loop over the database result set and create the
-			// user objects.
 			while (rs.next()) {
 				user.setId(rs.getInt("id"));
 				user.setFirstname(rs.getString("firstname"));
 				user.setLastname(rs.getString("lastname"));
 			}
-			// Free resources
+			
 			rs.close();
 			ps.close();
-			stmt.close();
-			connection.close();
+			
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} 
@@ -79,9 +76,14 @@ public class UserDaoMysql {
 	
 	public String registe(String username, String password, String firstname, String lastname) {
 		Connection connection = DbConnection.getInstance();
-		Statement stmt;
+		
 		try {
-			stmt = connection.createStatement();
+			PreparedStatement usernameUnique;
+			usernameUnique = connection.prepareStatement("Select * FROM user WHERE username = ?");
+			usernameUnique.setString(1, username);
+			ResultSet r = usernameUnique.executeQuery();
+			if(r.next() == true) return "error";
+			
 			
 			PreparedStatement ps = connection.prepareStatement("INSERT into user (firstname, lastname, username, password)"
 					+ " values(?,?,?,?)");
@@ -91,13 +93,9 @@ public class UserDaoMysql {
 		    ps.setString(4, password);
 			ps.execute();
 			
-			// Loop over the database result set and create the
-			// user objects.
 			
-			// Free resources
 			ps.close();
-			stmt.close();
-			connection.close();
+			
 			return "success";
 		}catch (SQLException e) {
 			e.printStackTrace();
