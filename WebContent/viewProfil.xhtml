@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta charset="ISO-8859-1"/>
+<title>Profil</title>
+</h:head>
+<h:body>
+	Profil
+	<br/>
+	<ui:repeat value="#{viewProfil.infos}" var="p">
+		<h:form>
+		<h:outputText type="text" value="#{p.firstname} "/>
+		<h:outputText type="text" value="#{p.lastname}"/>
+		<br/>
+		<br/>
+		
+		<h:commandButton value="Relations in common" action="commonRelation.xhtml">
+			<f:setPropertyActionListener value="#{p.id}" target="#{commonRelation.idUser2}">
+			</f:setPropertyActionListener>
+		</h:commandButton>
+		</h:form>
+	</ui:repeat>
+	
+	<br/><br/><br/>
+	<h:link value="Return" outcome="relation.xhtml"/>
+</h:body>
+</html>

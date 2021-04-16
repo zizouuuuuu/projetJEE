@@ -15,13 +15,15 @@
 		<h:inputTextarea type="text" value="#{post.contenu}" required="true"/>
 		<br/><br/>
 		
-		<h:commandButton value="Add Post" action="#{post.addPost()}" /> 
+		<h:commandButton value="Add Post" action="#{post.addPost()}">
+		 <f:ajax execute="@form" render="@none" />
+		 </h:commandButton> 
 	</h:form>
 	
 	<ul>
     <ui:repeat value="#{post.posts}" var="p">
         <li>
-        <h:outputText type="text" value="#{p.firstname} #{p.lastname} "/>
+        <h:outputText type="text" value="#{p.firstname} #{p.lastname} : "/>
        	<h:outputText type="text" value="#{p.contenu}"/>
 		
         </li>

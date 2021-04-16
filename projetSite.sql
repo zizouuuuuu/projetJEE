@@ -4,11 +4,12 @@ CREATE TABLE user (
   id integer NOT NULL AUTO_INCREMENT,
   firstname varchar(20) NOT NULL,
   lastname varchar(20) NOT NULL,
-  username varchar(20) NOT NULL,
+  username varchar(20) NOT NULL UNIQUE,
   password varchar(20) NOT NULL,
   PRIMARY KEY (username),
   KEY(id)
 )ENGINE=MYISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
 
 CREATE TABLE relation (
 	id_user_1 integer,
@@ -27,6 +28,18 @@ CREATE TABLE post (
     primary key (id),
     foreign key (id_user) references user (id)
 )ENGINE=MYISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
+
+
+select * from post;
+
+SELECT * FROM user WHERE id not in (SELECT id_user_1 from relation where id_user_1 = 1)
+	and id not in (SELECT id_user_2 from relation where id_user_1 = 1);
+
+
+SELECT * FROM user WHERE id = (SELECT id_user_1 from relation where id_user_1 = 1);
+
+SELECT * FROM relation where id_user_1=1 or id_user_2=1;
+
 
 
 

@@ -46,5 +46,9 @@ public class User {
 		return this;
 	}
 	
+	public String toStrong() {
+		return "Firstname : "+firstname+" lastname : "+lastname;
+	}
+	
 	
 }

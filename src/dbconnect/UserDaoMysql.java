@@ -17,18 +17,17 @@ public class UserDaoMysql {
 	
 	
 	
-	public List<User> findAll()
-	{
+	public List<User> getInfos(int idUser){
+		
 		List<User> users = new ArrayList<User>();
 		Connection connection = DbConnection.getInstance();
-		Statement stmt;
-
+		
 		try {
-			stmt = connection.createStatement();
-			ResultSet rs = stmt.executeQuery(GET_USERS_SQL);
+			PreparedStatement ps;
+			ps = connection.prepareStatement("Select firstname, lastname, id From user where id = ?");
+			ps.setInt(1, idUser);
+			ResultSet rs = ps.executeQuery();
 			
-			// Loop over the database result set and create the
-			// user objects.
 			while (rs.next()) {
 				User u = new User();
 				u.setId(rs.getInt("id"));
@@ -36,9 +35,7 @@ public class UserDaoMysql {
 				u.setLastname(rs.getString("lastname"));
 				users.add(u);
 			}
-			// Free resources
 			rs.close();
-			stmt.close();
 		}catch (SQLException e) {
 			e.printStackTrace();
 		} 

@@ -49,15 +49,20 @@ public class Relation implements Serializable{
 
 	public void setIdUser1(int idUser) {
 		this.idUser1 = idUser;
+		
+		
 	}
 	
 	
 	public int getIdUser2() {
+		
 		return idUser2;
 	}
 
 	public void setIdUser2(int idUser2) {
 		this.idUser2 = idUser2;
+		FacesContext.getCurrentInstance().getExternalContext()
+        .getSessionMap().put("idUser2", this.idUser2);
 	}
 	
 

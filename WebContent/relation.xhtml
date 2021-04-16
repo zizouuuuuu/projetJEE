@@ -13,17 +13,27 @@
     <ui:repeat value="#{relation.relations}" var="r">
         <li>
 		<h:form>
+		
        	<h:outputText type="text" value="#{r.firstname} "/>
        	
-       	<h:outputText type="text" value="#{r.id} "/>
+       	<h:commandButton value="ViewProfil" action="viewProfil.xhtml">
+			<f:setPropertyActionListener value="#{r.id}" target="#{relation.idUser2}">
+			</f:setPropertyActionListener>
+		</h:commandButton>
+       	
        		
 		<h:commandButton value="Add" action="#{relation.addRelation()}">
-			<f:setPropertyActionListener target="#{relation.idUser2}" value="#{r.id}"></f:setPropertyActionListener>
+			<f:setPropertyActionListener target="#{relation.idUser2}" value="#{r.id}">
+			</f:setPropertyActionListener>
 		</h:commandButton>
 		</h:form>
         </li>
     </ui:repeat>
 </ul>
+
+	<br/>
+	<br/>
+	<h:link value="Return" outcome="accueil.xhtml"/>
 	
 </h:body>
 </html>
