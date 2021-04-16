@@ -9,6 +9,7 @@ public class PostM {
 	Time heure;
 	String contenu;
 	int idUser;
+	String firstname, lastname;
 	
 	
 	public PostM() {
@@ -41,6 +42,22 @@ public class PostM {
 	}
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
+	}
+
+	public String getFirstname() {
+		return firstname;
+	}
+
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 	
 	

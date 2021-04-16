@@ -11,20 +11,29 @@
 	
 	<h:form>
 		Post
-		<h:inputTextarea type="text" value="#{post.contenu}" required="true"/>
-		<br><br>
 		
-		<h:commandButton value="Login" action="#{post.addPost()}" /> 
+		<h:inputTextarea type="text" value="#{post.contenu}" required="true"/>
+		<br/><br/>
+		
+		<h:commandButton value="Add Post" action="#{post.addPost()}">
+		 <f:ajax execute="@form" render="@none" />
+		 </h:commandButton> 
 	</h:form>
 	
 	<ul>
     <ui:repeat value="#{post.posts}" var="p">
         <li>
-        <h:outputText type="number" value="#{p.idUser}"/>
+        <h:outputText type="text" value="#{p.firstname} #{p.lastname} : "/>
        	<h:outputText type="text" value="#{p.contenu}"/>
 		
         </li>
     </ui:repeat>
-</ul>
+	</ul>
+
+	<br/>
+	<h:link value="Find relations" outcome="relation.xhtml"/>
+	<br/>
+	<h:link value="Disconnect" outcome="login.xhtml"/>
+	
 </h:body>
 </html>
