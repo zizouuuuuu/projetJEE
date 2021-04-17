@@ -11,7 +11,10 @@ import model.PostM;
 
 public class PostDaoMysql  {
 
+	//recuperer tous les posts
 	public ArrayList<PostM> getAllPosts(){
+		
+		//PostM model
 		ArrayList<PostM> a = new ArrayList<>();
 		Connection connection = DbConnection.getInstance();
 		
@@ -50,7 +53,7 @@ public class PostDaoMysql  {
 		return a;
 	}
 	
-	
+	//ajouter un post
 	public String addPostBD(PostM post) {
 		Connection connection = DbConnection.getInstance();
 		

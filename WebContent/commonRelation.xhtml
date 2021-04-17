@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta charset="ISO-8859-1"/>
+<title>Relation</title>
+</h:head>
+<h:body>
+
+	<ul>
+    <ui:repeat value="#{commonRelation.relations}" var="r">
+    	<li>
+		
+       	<h:outputText type="text" value="#{r.firstname} "/>       	
+        <h:outputText type="text" value="#{r.lastname}"/>       		
+		
+        </li>
+     </ui:repeat>
+	</ul>
+	
+	<br/>	<br/>	<br/>
+	<h:link value="Return" outcome="viewProfil.xhtml"/>
+
+</h:body>
+</html>

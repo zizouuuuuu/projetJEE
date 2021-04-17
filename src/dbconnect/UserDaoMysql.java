@@ -16,9 +16,9 @@ public class UserDaoMysql {
 	private static String GET_USERS_SQL = "SELECT id, firstname, lastname FROM user";
 	
 	
-	
+	//afficher les infos d'un user
 	public List<User> getInfos(int idUser){
-		²
+		
 		List<User> users = new ArrayList<User>();
 		Connection connection = DbConnection.getInstance();
 		
@@ -42,6 +42,7 @@ public class UserDaoMysql {
 		return users;
 	}
 	
+	//connexion, creation d'un objet user
 	public User login(String username, String password) {
 		User user = new User();
 		Connection connection = DbConnection.getInstance();
@@ -71,6 +72,8 @@ public class UserDaoMysql {
 		return user;
 	}
 	
+	
+	//inscription
 	public String registe(String username, String password, String firstname, String lastname) {
 		Connection connection = DbConnection.getInstance();
 		

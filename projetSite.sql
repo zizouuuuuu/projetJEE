@@ -29,7 +29,7 @@ CREATE TABLE post (
     foreign key (id_user) references user (id)
 )ENGINE=MYISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
-
+delete from post;
 select * from post;
 
 SELECT * FROM user WHERE id not in (SELECT id_user_1 from relation where id_user_1 = 1)
@@ -40,6 +40,7 @@ SELECT * FROM user WHERE id = (SELECT id_user_1 from relation where id_user_1 = 
 
 SELECT * FROM relation where id_user_1=1 or id_user_2=1;
 
+select * from relation;
 
-
+SELECT id_user_2 from relation where id_user_1 = 1 INTERSECT id_user_1 = 3;
 

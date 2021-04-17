@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import dbconnect.PostDaoMysql;
@@ -24,10 +25,13 @@ public class ViewProfil implements Serializable {
 	int id;
 	
 	List<User> infos;
+	UserDaoMysql user = new UserDaoMysql();
+	
 	@PostConstruct
     public void init() {
-	
-		UserDaoMysql user = new UserDaoMysql();
+		this.id = (int) FacesContext.getCurrentInstance().getExternalContext()
+		        .getSessionMap().get("idUser2");
+		
 		this.infos = user.getInfos(id);
 		
 	}
@@ -49,6 +53,14 @@ public class ViewProfil implements Serializable {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<User> getInfos() {
+		return infos;
+	}
+
+	public void setInfos(List<User> infos) {
+		this.infos = infos;
 	}
 	
 	

@@ -13,11 +13,15 @@
     <ui:repeat value="#{relation.relations}" var="r">
         <li>
 		<h:form>
-		<h:commandLink id ="{r.id}" action = "viewProfil.xhtml">
+		
        	<h:outputText type="text" value="#{r.firstname} "/>
-       	</h:commandLink>
-       	<h:outputText type="text" value="#{r.id} "/>
-       		
+       	
+       	<h:commandButton value="ViewProfil" action="viewProfil.xhtml">
+			<f:setPropertyActionListener value="#{r.id}" target="#{relation.idUser2}">
+			</f:setPropertyActionListener>
+		</h:commandButton>
+       	
+       	<br/>
 		<h:commandButton value="Add" action="#{relation.addRelation()}">
 			<f:setPropertyActionListener target="#{relation.idUser2}" value="#{r.id}">
 			</f:setPropertyActionListener>
@@ -26,6 +30,10 @@
         </li>
     </ui:repeat>
 </ul>
+
+	<br/>
+	<br/>
+	<h:link value="Return" outcome="accueil.xhtml"/>
 	
 </h:body>
 </html>

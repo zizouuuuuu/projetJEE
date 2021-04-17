@@ -13,6 +13,7 @@ import model.User;
 
 public class RelationDaoMysql {
 	
+	//afficher des users avec qui on est pas en relation
 	public ArrayList<User> getAll(int idUser){
 		ArrayList<User> a = new ArrayList<>();
 		Connection connection = DbConnection.getInstance();
@@ -46,6 +47,41 @@ public class RelationDaoMysql {
 		return a;
 	}
 	
+	//afficher les relations en commun avec un certain user
+	public ArrayList<User> getCommonRelation(int idUser1, int idUser2){
+		ArrayList<User> a = new ArrayList<>();
+		Connection connection = DbConnection.getInstance();
+		
+		try {
+			PreparedStatement ps;			
+				ps = connection.prepareStatement("SELECT * FROM user WHERE id in (SELECT id_user_2 from relation where id_user_1 = ?)"
+						+ "and id in (SELECT id_user_2 from relation where id_user_1 = ?)");
+				ps.setInt(1, idUser1);
+				ps.setInt(2, idUser2);
+				 
+				ResultSet r = ps.executeQuery();
+				User user;
+				
+				while(r.next()) {
+					user = new User();
+					user.setFirstname(r.getString("firstname"));
+					user.setLastname(r.getString("lastname"));
+					user.setId(Integer.parseInt(r.getString("id")));
+					a.add(user);
+					}
+				
+				r.close();
+			
+			r.close();
+			ps.close();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return a;
+	}
+	
+	//afficher mes relations
 	public ArrayList<User> getMyRelation(int idUser){
 		ArrayList<User> a = new ArrayList<>();
 		Connection connection = DbConnection.getInstance();
@@ -76,6 +112,7 @@ public class RelationDaoMysql {
 		return a;
 	}
 	
+	//ajouter une relation
 	public String addRelationDb(RelationM relation) {
 		Connection connection = DbConnection.getInstance();
 		
@@ -104,6 +141,7 @@ public class RelationDaoMysql {
 		return "error";
 	}
 	
+	//supprimer une relation
 	public void deleteRelationDb(RelationM relation) {
 		Connection connection = DbConnection.getInstance();
 		try {
