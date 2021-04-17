@@ -53,7 +53,11 @@ public class PostDaoMysql  {
 		return a;
 	}
 	
+<<<<<<< HEAD
 	//ajouter un post
+=======
+	
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
 	public String addPostBD(PostM post) {
 		Connection connection = DbConnection.getInstance();
 		

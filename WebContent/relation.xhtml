@@ -13,6 +13,7 @@
     <ui:repeat value="#{relation.relations}" var="r">
         <li>
 		<h:form>
+<<<<<<< HEAD
 		
        	<h:outputText type="text" value="#{r.firstname} "/>
        	
@@ -25,6 +26,14 @@
 		<h:commandButton value="Add" action="#{relation.addRelation()}">
 			<f:setPropertyActionListener target="#{relation.idUser2}" value="#{r.id}">
 			</f:setPropertyActionListener>
+=======
+       	<h:outputText type="text" value="#{r.firstname} "/>
+       	
+       	<h:outputText type="text" value="#{r.id} "/>
+       		
+		<h:commandButton value="Add" action="#{relation.addRelation()}">
+			<f:setPropertyActionListener target="#{relation.idUser2}" value="#{r.id}"></f:setPropertyActionListener>
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
 		</h:commandButton>
 		</h:form>
         </li>

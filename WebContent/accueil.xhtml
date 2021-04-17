@@ -15,14 +15,22 @@
 		<h:inputTextarea type="text" value="#{post.contenu}" required="true"/>
 		<br/><br/>
 		
+<<<<<<< HEAD
 		<h:commandButton value="Add Post" action="#{post.addPost()}">
 		 </h:commandButton> 
+=======
+		<h:commandButton value="Add Post" action="#{post.addPost()}" /> 
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
 	</h:form>
 	
 	<ul>
     <ui:repeat value="#{post.posts}" var="p">
         <li>
+<<<<<<< HEAD
         <h:outputText type="text" value="#{p.firstname} #{p.lastname} : "/>
+=======
+        <h:outputText type="text" value="#{p.firstname} #{p.lastname} "/>
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
        	<h:outputText type="text" value="#{p.contenu}"/>
 		
         </li>

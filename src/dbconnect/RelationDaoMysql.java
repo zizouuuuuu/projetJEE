@@ -13,12 +13,16 @@ import model.User;
 
 public class RelationDaoMysql {
 	
+<<<<<<< HEAD
 	//afficher des users avec qui on est pas en relation
+=======
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
 	public ArrayList<User> getAll(int idUser){
 		ArrayList<User> a = new ArrayList<>();
 		Connection connection = DbConnection.getInstance();
 		
 		try {
+<<<<<<< HEAD
 			PreparedStatement ps;			
 				ps = connection.prepareStatement("SELECT * FROM user WHERE id not in (SELECT id_user_1 from relation where id_user_1 = ?)"
 						+ "and id not in (SELECT id_user_2 from relation where id_user_1 = ?)");
@@ -71,6 +75,21 @@ public class RelationDaoMysql {
 					}
 				
 				r.close();
+=======
+			PreparedStatement ps;
+			ps = connection.prepareStatement("SELECT * FROM user WHERE id != ?");
+			ps.setString(1, String.valueOf(idUser));
+			ResultSet r = ps.executeQuery();
+			
+			User user = new User();
+			
+			while(r.next()) {
+				user.setFirstname(r.getString("firstname"));
+				user.setLastname(r.getString("lastname"));
+				user.setId(Integer.parseInt(r.getString("id")));
+				a.add(user);
+			}
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
 			
 			r.close();
 			ps.close();
@@ -81,7 +100,10 @@ public class RelationDaoMysql {
 		return a;
 	}
 	
+<<<<<<< HEAD
 	//afficher mes relations
+=======
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
 	public ArrayList<User> getMyRelation(int idUser){
 		ArrayList<User> a = new ArrayList<>();
 		Connection connection = DbConnection.getInstance();
@@ -112,7 +134,10 @@ public class RelationDaoMysql {
 		return a;
 	}
 	
+<<<<<<< HEAD
 	//ajouter une relation
+=======
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
 	public String addRelationDb(RelationM relation) {
 		Connection connection = DbConnection.getInstance();
 		
@@ -141,7 +166,10 @@ public class RelationDaoMysql {
 		return "error";
 	}
 	
+<<<<<<< HEAD
 	//supprimer une relation
+=======
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
 	public void deleteRelationDb(RelationM relation) {
 		Connection connection = DbConnection.getInstance();
 		try {

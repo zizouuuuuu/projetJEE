@@ -49,8 +49,11 @@ public class Relation implements Serializable{
 
 	public void setIdUser1(int idUser) {
 		this.idUser1 = idUser;
+<<<<<<< HEAD
 		
 		
+=======
+>>>>>>> d901fb57b5fafae59f00ac599a662f012e805993
 	}
 	
 	
